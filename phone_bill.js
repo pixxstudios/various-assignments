@@ -1,3 +1,4 @@
+"use strict";
 /*
 -- Description --
 
@@ -11,6 +12,9 @@ We need to calculate the phone bill given the following conditions.
 4. If longest duration is tie between two or more phone numbers
     then phone number with smallest num value will be free
 */
+exports.__esModule = true;
+// NOTE: validation step 4 is missing from the code for now //
+exports["default"] = {};
 function solution(S) {
     // get the phone numbers
     var numbers = [];

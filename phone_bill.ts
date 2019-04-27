@@ -12,12 +12,16 @@ We need to calculate the phone bill given the following conditions.
     then phone number with smallest num value will be free
 */
 
+// NOTE: validation step 4 is missing from the code for now //
+
+export default {};
+
 interface CallsData {
     number: string,
     duration: number
 }
 
-function solution(S: String) {
+function solution(S: String): void {
     // get the phone numbers
     const numbers: Array<string> = [];
     const duration: Array<string> = [];
@@ -37,7 +41,7 @@ function solution(S: String) {
 
     // calculate the longest duration
     // let maxDurationNumber = numbers[0].sec;
-    duration.forEach((d,i) => {
+    duration.forEach((d: string,i: number) => {
         let sec: number = 0;
         sec = getSeconds(d);
         if(sec < 300 ) {
@@ -59,7 +63,7 @@ function solution(S: String) {
         }
     })
 
-    callsData.forEach(callData => {
+    callsData.forEach((callData: CallsData) => {
         if(callData.number === maxDurationNumber) {
             if(callData.duration < 300) {
                 billToReduce += callData.duration * 3;
@@ -73,11 +77,11 @@ function solution(S: String) {
     console.log('totalCost ', totalCost);
  }
 
-function getSeconds(d) {
+function getSeconds(d: string): number {
     return Number(d.split(':')[0]) * 60 * 60 + Number(d.split(':')[1]) * 60 + Number(d.split(':')[2]);
 }
 
-let S =`00:01:00,400-234-090
+const S: string =`00:01:00,400-234-090
 00:05:00,701-080-080
 00:05:00,400-234-090
 00:01:00,701-080-080`;
