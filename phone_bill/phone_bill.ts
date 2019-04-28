@@ -38,7 +38,6 @@ function solution(S: String): void {
     });
 
     // calculate the longest duration
-    // let maxDurationNumber = numbers[0].sec;
     duration.forEach((d: string,i: number) => {
         let sec: number = 0;
         sec = getSeconds(d);
