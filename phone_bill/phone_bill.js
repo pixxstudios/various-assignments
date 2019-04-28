@@ -13,8 +13,6 @@ We need to calculate the phone bill given the following conditions.
     then phone number with smallest num value will be free
 */
 exports.__esModule = true;
-// NOTE: validation step 4 is missing from the code for now //
-exports["default"] = {};
 function solution(S) {
     // get the phone numbers
     var numbers = [];
@@ -68,5 +66,7 @@ function solution(S) {
 function getSeconds(d) {
     return Number(d.split(':')[0]) * 60 * 60 + Number(d.split(':')[1]) * 60 + Number(d.split(':')[2]);
 }
+exports.getSeconds = getSeconds;
+exports["default"] = {};
 var S = "00:01:00,400-234-090\n00:05:00,701-080-080\n00:05:00,400-234-090\n00:01:00,701-080-080";
 solution(S);

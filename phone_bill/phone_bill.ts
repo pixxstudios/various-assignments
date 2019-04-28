@@ -14,8 +14,6 @@ We need to calculate the phone bill given the following conditions.
 
 // NOTE: validation step 4 is missing from the code for now //
 
-export default {};
-
 interface CallsData {
     number: string,
     duration: number
@@ -80,6 +78,10 @@ function solution(S: String): void {
 function getSeconds(d: string): number {
     return Number(d.split(':')[0]) * 60 * 60 + Number(d.split(':')[1]) * 60 + Number(d.split(':')[2]);
 }
+
+export {
+    getSeconds
+};
 
 const S: string =`00:01:00,400-234-090
 00:05:00,701-080-080
