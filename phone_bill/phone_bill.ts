@@ -72,7 +72,7 @@ function solution(S: String): void {
     })
     
     totalCost -= billToReduce;
-    let tempCallsData = [];//[totalCostData].filter(calls => calls.duration !== maxDuration);
+    let tempCallsData = [];
     for(let i in totalCostData) {
         if(totalCostData[i] === maxDuration)
             tempCallsData.push({ number: i, duration: totalCostData[i]});
@@ -82,9 +82,7 @@ function solution(S: String): void {
         if(totalCostData[i].number > smallestNumber)
             smallestNumber = totalCostData[i].number;
     }
-    console.log('tempCallsData ', tempCallsData);
     console.log('totalCost ', totalCost);
-    console.log('smallestNumber ', smallestNumber);
  }
 
 function getSeconds(d: string): number {

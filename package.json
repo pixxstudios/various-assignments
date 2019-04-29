@@ -1,0 +1,22 @@
+{
+  "name": "various-assignments",
+  "version": "1.0.0",
+  "description": "Solutions to various assignments from different portals using ES6 and TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixxstudios/various-assignments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pixxstudios/various-assignments/issues"
+  },
+  "homepage": "https://github.com/pixxstudios/various-assignments#readme",
+  "devDependencies": {
+    "jest": "^24.7.1"
+  }
+}
