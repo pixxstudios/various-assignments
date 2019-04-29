@@ -84,6 +84,7 @@ function solution(S: String): void {
     }
     console.log('tempCallsData ', tempCallsData);
     console.log('totalCost ', totalCost);
+    console.log('smallestNumber ', smallestNumber);
  }
 
 function getSeconds(d: string): number {

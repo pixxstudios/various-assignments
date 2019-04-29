@@ -73,6 +73,7 @@ function solution(S) {
     }
     console.log('tempCallsData ', tempCallsData);
     console.log('totalCost ', totalCost);
+    console.log('smallestNumber ', smallestNumber);
 }
 function getSeconds(d) {
     return Number(d.split(':')[0]) * 60 * 60 + Number(d.split(':')[1]) * 60 + Number(d.split(':')[2]);
