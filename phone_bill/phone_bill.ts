@@ -12,76 +12,49 @@ We need to calculate the phone bill given the following conditions.
     then phone number with smallest num value will be free
 */
 
-// NOTE: validation step 4 is missing from the code for now //
-
-interface CallsData {
-    number: string,
-    duration: number
-}
-
 function solution(S: String): void {
     // get the phone numbers
-    const numbers: Array<string> = [];
-    const duration: Array<string> = [];
-    const callsData: Array<CallsData> = [];
-    const totalCostData: object = {};
+    const callsData: object = {};
 
     let totalCost: number = 0;
     let maxDuration: number = 0;
-    let maxDurationNumber: string = undefined;
-    let billToReduce: number = 0;
-    let tiePhoneNumbers: Array<number> = [];
+    let minValueNumber: number = 999999999;
 
     S.split('\n').forEach((n: string) => {
-        numbers.push(n.split(',')[1].split('-').join(''));
-        duration.push(n.split(',')[0]);
+        const number = Number(n.split(',')[1].split('-').join(''));
+        const duration = n.split(',')[0];
+
+        const sec = getSeconds(duration);
+        
+        if(callsData[number])
+            callsData[number] += sec;
+        else
+            callsData[number] = sec;
+
+        if(callsData[number] > maxDuration) {
+            maxDuration = callsData[number];
+        }
     });
 
     // calculate the longest duration
-    duration.forEach((d: string, i: number) => {
-        let sec: number = 0;
-        sec = getSeconds(d);
-        if(sec < 300 ) {
-            totalCost += sec * 3; 
-        } else {
-            totalCost += 150 * Math.ceil(sec/60);
-        }
-
-        callsData.push({ "number" : numbers[i], "duration": Number(sec)});
-        if(totalCostData.hasOwnProperty(numbers[i]))
-            totalCostData[numbers[i]] += Number(sec);
-        else 
-            totalCostData[numbers[i]] = Number(sec);
-
-        // check for max duration
-        if(totalCostData[numbers[i]] > maxDuration) {
-           maxDuration = totalCostData[numbers[i]];
-           maxDurationNumber = numbers[i];
-           console.log(' -=>>> ',totalCostData[numbers[i]]);
-        }
-    })
-
-    callsData.forEach((callData: CallsData) => {
-        if(callData.number === maxDurationNumber) {
-            if(callData.duration < 300) {
-                billToReduce += callData.duration * 3;
-            } else {
-                billToReduce += Math.ceil(callData.duration/60) * 150;
+    for(let key in callsData) {
+        if(callsData[key] === maxDuration) {
+            if (Number(key) < minValueNumber) {
+                minValueNumber = Number(key);
             }
         }
-    })
+    }
+
+    for(let key in callsData) {
+        if(Number(key) !== minValueNumber) {
+            if(callsData[key] < 300 ) {
+                totalCost += callsData[key] * 3; 
+            } else {
+                totalCost += 150 * Math.ceil(callsData[key]/60);
+            }
+        }
+    }
     
-    totalCost -= billToReduce;
-    let tempCallsData = [];
-    for(let i in totalCostData) {
-        if(totalCostData[i] === maxDuration)
-            tempCallsData.push({ number: i, duration: totalCostData[i]});
-    }
-    let smallestNumber = tempCallsData[0].number;
-    for(let i in totalCostData) {
-        if(totalCostData[i].number > smallestNumber)
-            smallestNumber = totalCostData[i].number;
-    }
     console.log('totalCost ', totalCost);
  }
 
