@@ -33,12 +33,12 @@ function solution(S: String): void {
     let tiePhoneNumbers: Array<number> = [];
 
     S.split('\n').forEach((n: string) => {
-        numbers.push(n.split(',')[1]);
+        numbers.push(n.split(',')[1].split('-').join(''));
         duration.push(n.split(',')[0]);
     });
 
     // calculate the longest duration
-    duration.forEach((d: string,i: number) => {
+    duration.forEach((d: string, i: number) => {
         let sec: number = 0;
         sec = getSeconds(d);
         if(sec < 300 ) {
@@ -55,8 +55,9 @@ function solution(S: String): void {
 
         // check for max duration
         if(totalCostData[numbers[i]] > maxDuration) {
-           maxDuration = callsData[numbers[i]];
+           maxDuration = totalCostData[numbers[i]];
            maxDurationNumber = numbers[i];
+           console.log(' -=>>> ',totalCostData[numbers[i]]);
         }
     })
 
@@ -71,6 +72,17 @@ function solution(S: String): void {
     })
     
     totalCost -= billToReduce;
+    let tempCallsData = [];//[totalCostData].filter(calls => calls.duration !== maxDuration);
+    for(let i in totalCostData) {
+        if(totalCostData[i] === maxDuration)
+            tempCallsData.push({ number: i, duration: totalCostData[i]});
+    }
+    let smallestNumber = tempCallsData[0].number;
+    for(let i in totalCostData) {
+        if(totalCostData[i].number > smallestNumber)
+            smallestNumber = totalCostData[i].number;
+    }
+    console.log('tempCallsData ', tempCallsData);
     console.log('totalCost ', totalCost);
  }
 

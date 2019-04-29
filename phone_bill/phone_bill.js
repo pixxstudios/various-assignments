@@ -25,11 +25,10 @@ function solution(S) {
     var billToReduce = 0;
     var tiePhoneNumbers = [];
     S.split('\n').forEach(function (n) {
-        numbers.push(n.split(',')[1]);
+        numbers.push(n.split(',')[1].split('-').join(''));
         duration.push(n.split(',')[0]);
     });
     // calculate the longest duration
-    // let maxDurationNumber = numbers[0].sec;
     duration.forEach(function (d, i) {
         var sec = 0;
         sec = getSeconds(d);
@@ -46,8 +45,9 @@ function solution(S) {
             totalCostData[numbers[i]] = Number(sec);
         // check for max duration
         if (totalCostData[numbers[i]] > maxDuration) {
-            maxDuration = callsData[numbers[i]];
+            maxDuration = totalCostData[numbers[i]];
             maxDurationNumber = numbers[i];
+            console.log(' -=>>> ', totalCostData[numbers[i]]);
         }
     });
     callsData.forEach(function (callData) {
@@ -61,12 +61,22 @@ function solution(S) {
         }
     });
     totalCost -= billToReduce;
+    var tempCallsData = []; //[totalCostData].filter(calls => calls.duration !== maxDuration);
+    for (var i in totalCostData) {
+        if (totalCostData[i] === maxDuration)
+            tempCallsData.push({ number: i, duration: totalCostData[i] });
+    }
+    var smallestNumber = tempCallsData[0].number;
+    for (var i in totalCostData) {
+        if (totalCostData[i].number > smallestNumber)
+            smallestNumber = totalCostData[i].number;
+    }
+    console.log('tempCallsData ', tempCallsData);
     console.log('totalCost ', totalCost);
 }
 function getSeconds(d) {
     return Number(d.split(':')[0]) * 60 * 60 + Number(d.split(':')[1]) * 60 + Number(d.split(':')[2]);
 }
 exports.getSeconds = getSeconds;
-exports["default"] = {};
 var S = "00:01:00,400-234-090\n00:05:00,701-080-080\n00:05:00,400-234-090\n00:01:00,701-080-080";
 solution(S);
